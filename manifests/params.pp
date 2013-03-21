@@ -20,6 +20,8 @@ class nginx::params {
 		default => 'nginx-light'
 	}
 
+	$enabled = true
+
 	$user = $::operatingsystem ? {
 		default => 'www-data'
 	}

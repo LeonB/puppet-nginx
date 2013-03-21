@@ -15,8 +15,13 @@ class nginx::config {
 	# 	content => template('nginx/snippets/doc.erb')
 	# }
 
-	file { '/usr/share/nginx/www/index.html':
-		source => "puppet:///modules/nginx/index.html"
+	# file { '/usr/share/nginx/www/index.html':
+	# 	source => "puppet:///modules/nginx/index.html"
+	# }
+
+	file { '/etc/nginx/conf.d/proxy.conf':
+		ensure  => $nginx::ensure,
+		content => template('nginx/conf.d/proxy.conf'),
 	}
 
 }
