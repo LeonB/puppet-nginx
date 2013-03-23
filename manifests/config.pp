@@ -2,7 +2,7 @@ class nginx::config {
 
 	nginx::vhost { 'default':
 		server_name => 'localhost',
-		root        => '/usr/share/nginx/www'
+		root        => '/usr/share/nginx/html'
 	}
 
 	# nginx::vhost::snippet { 'index':
