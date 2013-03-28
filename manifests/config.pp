@@ -19,9 +19,14 @@ class nginx::config {
 	# 	source => "puppet:///modules/nginx/index.html"
 	# }
 
-	file { '/etc/nginx/conf.d/proxy.conf':
+	file { '/etc/nginx/proxy.conf':
 		ensure  => $nginx::ensure,
-		content => template('nginx/conf.d/proxy.conf'),
+		content => template('nginx/proxy.conf'),
+	}
+
+	file { '/etc/nginx/deny.conf':
+		ensure  => $nginx::ensure,
+		content => template('nginx/deny.conf'),
 	}
 
 }
