@@ -1,5 +1,11 @@
 class nginx::config {
 
+	# do package before config
+	Class['nginx::package'] -> Class['nginx::config']
+
+	# notify service class
+	Class['nginx::config'] ~> Class['nginx::service']
+
 	nginx::vhost { 'default':
 		server_name => 'localhost',
 		root        => '/usr/share/nginx/html'

@@ -9,7 +9,9 @@ define nginx::vhost::snippet(
 			ensure  => directory,
 			owner   => root,
 			group   => root,
-			mode    => 0600
+			mode    => 0600,
+			require => Class["nginx::package"],
+			notify => Class['nginx::service'],
 		}
 	}
 

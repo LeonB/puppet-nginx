@@ -13,4 +13,15 @@ define nginx::vhost(
 		content => $content
 	}
 
+	file{ "/etc/nginx/sites-available/${name}.d/":
+		ensure  => directory,
+		force   => true,
+		owner   => root,
+		group   => root,
+		mode    => 0600,
+		require => Class["nginx::package"],
+		notify  => Class["nginx::service"],
+		content => $content
+	}
+
 }
