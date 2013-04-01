@@ -8,7 +8,8 @@ class nginx::config {
 
 	nginx::vhost { 'default':
 		server_name => 'localhost',
-		root        => '/usr/share/nginx/html'
+		root        => '/usr/share/nginx/html',
+		source      => 'puppet:///modules/nginx/sites-available/default',
 	}
 
 	# nginx::vhost::snippet { 'index':
