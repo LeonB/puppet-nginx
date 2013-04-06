@@ -5,7 +5,7 @@
 
 server {
 	listen 80;
-	#listen [::]:80 default_server ipv6_only=on;
+	listen [::]:80 default_server ipv6only=on;
 
 	root <%= root %>;
 	index index.html index.htm;
