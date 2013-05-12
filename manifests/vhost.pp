@@ -12,10 +12,10 @@ define nginx::vhost(
 	if !$content and !$source {
 		$real_content = template('nginx/vhost.erb')
 	} else {
-		$real_content = undef
+		$real_content = $content
 	}
 
-	file{ "/etc/nginx/sites-available/${name}":
+	file { "/etc/nginx/sites-available/${name}":
 		owner   => root,
 		group   => root,
 		mode    => 0600,
@@ -38,8 +38,8 @@ define nginx::vhost(
 	file { "/etc/nginx/sites-enabled/${name}":
 		ensure  => 'link',
 		target  => "/etc/nginx/sites-available/${name}",
-                require => Class["nginx::package"],
-                notify  => Class["nginx::service"],
+        require => Class["nginx::package"],
+        notify  => Class["nginx::service"],
 	}
 
 }

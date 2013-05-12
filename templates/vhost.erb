@@ -4,37 +4,26 @@
 # into git.
 
 server {
-	listen 80;
-	listen [::]:80 default_server ipv6only=on;
+    root <%= root %>;
+    index index.html index.htm;
 
-	root <%= root %>;
-	index index.html index.htm;
+    # Make site accessible from http://<%= server_name %>/
+    <% if server_name.is_a? Array -%>
+    server_name <%= server_name.join(' ') %>;
+    <% else -%>
+    server_name <%= server_name %>;
+    <% end -%>
 
-	# Make site accessible from http://<%= server_name %>/
-	<% if server_name.is_a? Array -%>
-	server_name <%= server_name.join(' ') %>;
-	<% else -%>
-	server_name <%= server_name %>;
-	<% end -%>
+    # access_log  /var/log/nginx/<%= name %>.access.log;
 
-	# access_log  /var/log/nginx/<%= name %>.access.log;
+    #error_page 404 /404.html;
 
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ /index.html;
-		# Uncomment to enable naxsi on this location
-		# include /etc/nginx/naxsi.rules
-	}
+    # redirect server error pages to the static page /50x.html
+    #
+    #error_page 500 502 503 504 /50x.html;
+    #location = /50x.html {
+    #   root /usr/share/nginx/html;
+    #}
 
-	#error_page 404 /404.html;
-
-	# redirect server error pages to the static page /50x.html
-	#
-	#error_page 500 502 503 504 /50x.html;
-	#location = /50x.html {
-	#	root /usr/share/nginx/html;
-	#}
-
-	include /etc/nginx/sites-available/<%= name %>.d/*.conf;
+    include /etc/nginx/sites-available/<%= name %>.d/*.conf;
 }
