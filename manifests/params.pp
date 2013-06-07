@@ -14,16 +14,16 @@
 #
 class nginx::params {
 
-	### Application related parameters
+  ### Application related parameters
 
-	$package_name = $::operatingsystem ? {
-		default => 'nginx-light'
-	}
+  $package_name = $::operatingsystem ? {
+    default => 'nginx-light'
+  }
 
-	$enabled = true
+  $enabled = true
 
-	$user = $::operatingsystem ? {
-		default => 'www-data'
-	}
+  $user = $::operatingsystem ? {
+    default => 'www-data'
+  }
 
 }
