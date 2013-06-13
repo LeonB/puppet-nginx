@@ -4,16 +4,8 @@ define nginx::vhost::snippet(
   $ensure  = present
 ) {
 
-  if !defined(File["/etc/nginx/sites-available/${vhost}.d/"]) {
-    file { "/etc/nginx/sites-available/${vhost}.d/":
-      ensure  => directory,
-      owner   => root,
-      group   => root,
-      mode    => '0600',
-      require => Class['nginx::package'],
-      notify  => Class['nginx::service'],
-    }
-  }
+  # do vhost before snippet
+  Nginx::Vhost[$vhost] -> Nginx::Vhost::Snippet[$name]
 
   file { "/etc/nginx/sites-available/${vhost}.d/${name}.conf":
     ensure  => $ensure,
